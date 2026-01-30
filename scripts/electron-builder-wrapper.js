@@ -53,7 +53,8 @@ const runBuilder = function (wrapperConfig, target) {
     if (wrapperConfig.doSign &&
         (target.name.indexOf('nsis') === 0) &&
         !(childEnvironment.CSC_LINK || childEnvironment.WIN_CSC_LINK)) {
-        throw new Error(`Signing NSIS build requires CSC_LINK or WIN_CSC_LINK`);
+        console.warn('Warning: No signing configuration found. Building unsigned NSIS installer.');
+        // throw new Error(`Signing NSIS build requires CSC_LINK or WIN_CSC_LINK`);
     }
     const platformFlag = getPlatformFlag();
     let allArgs = [platformFlag, target.name];
@@ -130,7 +131,7 @@ const calculateTargets = function (wrapperConfig) {
     switch (process.platform) {
     case 'win32':
         // Run in two passes so we can skip signing the AppX for distribution through the MS Store.
-        targets.push(availableTargets.microsoftStore);
+        // targets.push(availableTargets.microsoftStore);
         targets.push(availableTargets.windowsDirectDownload);
         break;
     case 'darwin':

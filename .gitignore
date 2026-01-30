@@ -16,6 +16,9 @@ npm-*
 # Build
 /build
 /dist
+/dist-dir
+/dist-new
+/cache
 /.opt-in
 /*.provisionprofile
 
